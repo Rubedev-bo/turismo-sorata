@@ -1,0 +1,111 @@
+      table_name      |        column_name         |          data_type
+----------------------+----------------------------+-----------------------------
+ administrador        | admin_id                   | integer
+ administrador        | usuario                    | character varying
+ administrador        | contrasena_hsh             | character varying
+ administrador        | rol                        | character varying
+ administrador        | comunidad_id               | integer
+ administrador        | created_at                 | timestamp without time zone
+ administrador        | updated_at                 | timestamp without time zone
+ administrador        | estado                     | character varying
+ auditoriareserva     | auditoria_id               | integer
+ auditoriareserva     | reserva_id                 | integer
+ auditoriareserva     | admin_id                   | integer
+ auditoriareserva     | estado_anterior            | USER-DEFINED
+ auditoriareserva     | estado_nuevo               | USER-DEFINED
+ auditoriareserva     | created_at                 | timestamp without time zone
+ auditoriareserva     | observaciones              | text
+ auditoriareserva     | updated_at                 | timestamp without time zone
+ comunidad            | comunidad_id               | integer
+ comunidad            | nombre                     | character varying
+ comunidad            | imagen_representativa      | character varying
+ comunidad            | descripcion                | text
+ comunidad            | contacto_telefono          | character varying
+ comunidad            | contacto_email             | character varying
+ comunidad            | punto_partida_sorata       | character varying
+ comunidad            | dificultad_acceso          | USER-DEFINED
+ comunidad            | recomendaciones_acceso     | text
+ comunidad            | created_at                 | timestamp without time zone
+ comunidad            | updated_at                 | timestamp without time zone
+ comunidad            | estado                     | character varying
+ equipamiento         | equipamiento_id            | integer
+ equipamiento         | tipo_actividad             | USER-DEFINED
+ equipamiento         | categoria                  | USER-DEFINED
+ equipamiento         | item                       | character varying
+ equipamiento         | explicacion                | text
+ equipamiento         | created_at                 | timestamp without time zone
+ equipamiento         | updated_at                 | timestamp without time zone
+ equipamiento         | estado                     | character varying
+ experiencia          | experiencia_id             | integer
+ experiencia          | comunidad_id               | integer
+ experiencia          | nombre                     | character varying
+ experiencia          | imagen_principal           | character varying
+ experiencia          | descripcion_corta          | character varying
+ experiencia          | descripcion_completa       | text
+ experiencia          | duracion_estimada          | character varying
+ experiencia          | precio_bs                  | numeric
+ experiencia          | tipo_actividad             | USER-DEFINED
+ experiencia          | estado                     | character varying
+ experiencia          | created_at                 | timestamp without time zone
+ experiencia          | updated_at                 | timestamp without time zone
+ informacionclimatica | clima_id                   | integer
+ informacionclimatica | tipo_experiencia           | USER-DEFINED
+ informacionclimatica | temporada                  | USER-DEFINED
+ informacionclimatica | mejor_epoca                | boolean
+ informacionclimatica | temp_max_promedio          | numeric
+ informacionclimatica | temp_min_promedio          | numeric
+ informacionclimatica | recomendacion_vestimenta   | text
+ informacionclimatica | consideraciones_especiales | text
+ informacionclimatica | created_at                 | timestamp without time zone
+ informacionclimatica | updated_at                 | timestamp without time zone
+ informacionclimatica | estado                     | character varying
+ reserva              | reserva_id                 | integer
+ reserva              | experiencia_id             | integer
+ reserva              | numero_reserva             | character varying
+ reserva              | fecha_experiencia          | date
+ reserva              | fecha_reserva              | timestamp without time zone
+ reserva              | numero_adultos             | integer
+ reserva              | numero_ninos               | integer
+ reserva              | nombre_completo            | character varying
+ reserva              | email                      | character varying
+ reserva              | telefono                   | character varying
+ reserva              | estado                     | USER-DEFINED
+ reserva              | precio_total               | numeric
+ reserva              | confirmacion_automatica    | boolean
+ reserva              | fecha_confirmacion         | timestamp without time zone
+ reserva              | admin_id                   | integer
+ reserva              | created_at                 | timestamp without time zone
+ reserva              | updated_at                 | timestamp without time zone
+ tramoacceso          | tramo_id                   | integer
+ tramoacceso          | comunidad_id               | integer
+ tramoacceso          | tramo_numero               | integer
+ tramoacceso          | medio_transporte           | character varying
+ tramoacceso          | punto_partida              | character varying
+ tramoacceso          | horarios_aproximados       | character varying
+ tramoacceso          | duracion_estimada          | character varying
+ tramoacceso          | costo_aproximado           | numeric
+ tramoacceso          | imagen_referencia          | character varying
+ tramoacceso          | recomendaciones            | text
+ tramoacceso          | created_at                 | timestamp without time zone
+ tramoacceso          | updated_at                 | timestamp without time zone
+ tramoacceso          | estado                     | character varying
+
+ Esquema |          Nombre          |   Tipo    |    Due±o
+---------+--------------------------+-----------+-------------
+ public  | administrador            | tabla     | usr_turismo
+ public  | auditoriareserva         | tabla     | usr_turismo
+ public  | comunidad                | tabla     | usr_turismo
+ public  | equipamiento             | tabla     | usr_turismo
+ public  | experiencia              | tabla     | usr_turismo
+ public  | informacionclimatica     | tabla     | usr_turismo
+ public  | reserva                  | tabla     | usr_turismo
+ public  | reserva_seq              | secuencia | usr_turismo
+ public  | sq_admin                 | secuencia | usr_turismo
+ public  | sq_audit                 | secuencia | usr_turismo
+ public  | sq_comunidad             | secuencia | usr_turismo
+ public  | sq_equipamiento          | secuencia | usr_turismo
+ public  | sq_experiencia           | secuencia | usr_turismo
+ public  | sq_informacion_climatica | secuencia | usr_turismo
+ public  | sq_reserva               | secuencia | usr_turismo
+ public  | sq_tramacceso            | secuencia | usr_turismo
+ public  | tramoacceso              | tabla     | usr_turismo

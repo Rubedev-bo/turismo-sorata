@@ -1,0 +1,17 @@
+@media (max-width: 1023px){
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .hero-title{font-size:48px}
+}
+@media (max-width: 767px){
+  .grid-3{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+  .hero-title{font-size:36px}
+  .nav-links{display:none}
+  .nav-toggle{display:inline-block}
+}
+@media (max-width:480px){
+  .hero-title{font-size:28px}
+  body{font-size:16px}
+}

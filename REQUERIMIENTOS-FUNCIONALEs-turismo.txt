@@ -1,0 +1,370 @@
+REQUERIMIENTOS FUNCIONALES:
+MÓDULO 1: CATÁLOGO DIGITAL DE EXPERIENCIAS
+Visualización de Comunidades
+* El sistema debe mostrar una página principal con tarjetas visuales de cada comunidad participante
+* Cada tarjeta debe incluir: nombre de comunidad, imagen representativa y acceso a sus experiencias
+Gestión de Fichas de Experiencias
+* El sistema debe mostrar fichas individuales por cada experiencia turística
+* Cada ficha debe contener: nombre, fotografía principal, descripción corta (máx. 200 palabras), duración estimada y precio en bolivianos
+Sistema de Filtrado
+* El sistema debe permitir filtrar experiencias por tipo de actividad (trekking, hospedaje, cultural)
+* El sistema debe permitir filtrar experiencias por comunidad específica
+* Los filtros deben ser acumulativos y mostrar resultados en tiempo real
+Navegación entre Experiencias
+* El sistema debe permitir navegar de la vista de catálogo a la ficha detallada de cada experiencia
+* El sistema debe incluir un botón de retorno al catálogo desde cada ficha
+MÓDULO 2: SISTEMA DE RESERVAS
+Formulario de Reserva
+* El sistema debe presentar un formulario con los siguientes campos obligatorios:
+o Fecha de la experiencia (selector de calendario)
+o Comunidad seleccionada
+o Tipo de experiencia
+o Número de personas (adultos/niños)
+o Nombre completo del solicitante
+o Correo electrónico
+o Teléfono de contacto
+Validación de Disponibilidad
+* El sistema debe validar que la fecha seleccionada no sea anterior a la fecha actual
+* El sistema debe mostrar mensaje de error si faltan campos obligatorios
+Confirmación de Reserva
+* El sistema debe generar un número único de reserva
+* El sistema debe enviar correo electrónico de confirmación al turista con:
+o Número de reserva
+o Resumen de la experiencia seleccionada
+o Datos de la reserva (fecha, personas, precio total)
+o Información de contacto de la comunidad
+Panel Administrativo de Reservas
+* El sistema debe proporcionar un panel para administradores comunitarios
+* El panel debe mostrar lista de reservas con: número, fecha, experiencia, estado, número de personas
+* El sistema debe permitir cambiar estado de reserva (pendiente, confirmada, cancelada, completada)
+* El sistema debe permitir filtrar reservas por fecha y estado
+MÓDULO 3: GUÍA PRÁCTICA
+Página "Cómo Llegar"
+* El sistema debe mostrar una página con instrucciones de acceso en dos tramos:
+o Tramo 1: La Paz ? Sorata (con opciones de transporte, horarios aproximados, costos)
+o Tramo 2: Sorata ? cada comunidad (transporte local, tiempos, puntos de partida)
+* Cada tramo debe incluir imágenes de referencia de terminales/puntos clave
+Lista de Equipamiento
+* El sistema debe mostrar listados de equipamiento recomendado por tipo de actividad
+* Cada lista debe clasificar items en: esencial, recomendado, opcional
+Información Climática
+* El sistema debe mostrar información sobre:
+* Clima promedio por temporada (lluviosa/seca)
+* Mejor época para visitar cada tipo de experiencia
+* Rango de temperaturas esperadas
+* Recomendaciones de vestimenta
+
+
+
+(UML- Expandido Nivel 1)
+Caso de Uso No.1: Visualizar Comunidades
+Actor: TuristaRequisitos de Usabilidad: 
+La interfaz debe ser responsive 
+Las tarjetas deben ser claras con imágenes de alta calidadPrecondiciones: 
+El sistema debe tener por lo menos una comunidad registrada con su imagen y nombre
+El usuario debe tener conexión a intenetDescripción:  
+* El turista accede a la pagina principal del sistema
+* El siatema muestra tarjetas con todas las comunidades posibles
+* Cada tarjeta muestra: nombre de la comunida e imagen representativa
+* El turista visualiza las opciones disponibles
+* El turista puede hacer clic en una tarjeta para ver las experiencias de esa comunidadExcepciones: 
+Ex01: Si no hay comunidades registradas, mostrar mensaje: "Próximamente nuevas comunidades"
+Ex02: Si falla la carga de imágenes, mostrar imagen placeholder
+Ex03: Si hay error de conexión, mostrar mensaje: "Error al cargar comunidades. Intente nuevamente"Postcondiciones: 
+* El turista conoce las comunidades participantes disponibles
+* El sistema registra la visualización en analíticas (opcional)
+
+
+
+
+
+(UML- Expandido Nivel 2)
+Caso de Uso No.2: Consultar ficha de experiencia
+Actor: TuristaRequisitos de Usabilidad: 
+* La ficha debe mostrar información clara y estructurada
+* La fotografía debe ser de alta resolución
+* Descripción máxima: 200 palabras
+* Precio debe estar destacado visualmente
+* Botón "Reservar" debe ser prominente y accesiblePrecondiciones: 
+El turista debe haber seleccionado una comunidad o estar navegando el catálogo
+La experiencia debe estar publicada y activa en el sistemaDescripción:  
+* El turista hace clic en una experiencia específica desde el catálogo o comunidad
+* El sistema carga la ficha detallada de la experiencia
+* El sistema muestra: nombre, fotografía principal, descripción completa, duración estimada (horas/días), precio en bolivianos
+* El turista revisa la información presentada
+* El turista puede:   
+o Regresar al catálogo usando botón "Volver"  
+o Proceder a reservar usando botón "Reservar ahora"Excepciones: 
+Ex01: Si la experiencia no existe o fue eliminada, mostrar error 404: "Experiencia no encontrada" y redirigir al catálogo en 3 segundos
+Ex02: Si falla la carga de la imagen, mostrar imagen placeholder
+E3: Si faltan datos obligatorios (nombre, precio), mostrar mensaje: "Información incompleta. Contacte al administrador"Postcondiciones: 
+* El turista conoce los detalles completos de la experiencia
+* El sistema está listo para iniciar proceso de reserva si el turista lo solicita
+
+
+
+(UML- Expandido Nivel 2)
+Caso de Uso No.3: Filtrar Experiencias
+Actor: TuristaRequisitos de Usabilidad: 
+* Los filtros deben ser visibles y accesibles en la parte superior del catálogo
+* Los resultados deben actualizarse en tiempo real (sin recargar página)
+* Debe haber un botón "Limpiar filtros" visible
+* Indicador visual de cuántos filtros están activosPrecondiciones: 
+* El turista debe estar en la página del catálogo de experiencias
+* Debe haber al menos una experiencia registrada en el sistemaDescripción:  
+* El turista accede a la sección de filtros en el catálogo
+* El sistema muestra opciones de filtrado disponibles:   - Por tipo de actividad: Trekking, Hospedaje, Cultural   - Por comunidad: Lista de todas las comunidades disponibles
+* El turista selecciona uno o más criterios de filtrado
+* El sistema aplica los filtros seleccionados inmediatamente
+* El sistema muestra únicamente las experiencias que cumplen TODOS los criterios seleccionados
+* El sistema indica cantidad de resultados encontrados (ej: "12 experiencias encontradas")
+* El turista puede:   
+o Agregar más filtros   
+o Remover filtros individuales   
+o Limpiar todos los filtrosExcepciones: 
+Ex01: Si no hay resultados con los filtros aplicados, mostrar mensaje: "No se encontraron experiencias con estos criterios. Intenta con otros filtros"
+Ex02: Si hay error al aplicar filtros, mantener vista actual y mostrar mensaje de errorPostcondiciones: 
+* El catálogo muestra solo las experiencias que cumplen los criterios seleccionados
+* Los filtros activos quedan visibles para el usuario
+* El estado de filtrado se mantiene durante la sesión de navegación
+(UML- Expandido Nivel 1)
+Caso de Uso No.4: Realizar Reserva
+Actor: TuristaRequisitos de Usabilidad: 
+* Formulario simple y claro con campos bien etiquetados
+* Validación en tiempo real de campos obligatorios
+* Calendario visual para selección de fecha
+* Mensajes de error específicos y claros
+* Confirmación visual antes de enviar
+* Mensaje de éxito prominente con número de reservaPrecondiciones: 
+* El turista debe haber consultado una experiencia específica
+* El sistema de correo electrónico debe estar configurado y operativo
+* La experiencia debe estar disponible para reservasDescripción:  
+* El turista hace clic en el botón "Reservar ahora" desde la ficha de experiencia
+* El sistema muestra formulario de reserva pre-rellenado con: comunidad y tipo de experiencia
+* El turista completa los campos obligatorios:   
+o Fecha de la experiencia (selector de calendario)  
+o Número de personas (campo numérico con selectores de adultos/niños)  
+o Nombre completo 
+o Correo electrónico  
+o Teléfono de contacto
+* El sistema valida en tiempo real:  
+o Que la fecha no sea anterior al día actual 
+o Formato correcto de correo electrónico  
+o Que todos los campos obligatorios estén completos
+* El turista revisa los datos y hace clic en "Confirmar reserva"
+* El sistema genera un número único de reserva (formato: RES-YYYYMMDD-XXXX)
+* El sistema registra la reserva en base de datos con estado "Pendiente"
+* El sistema envía correo electrónico de confirmación al turista conteniendo:   
+o Número de reserva   
+o Nombre de la experiencia   
+o Comunidad  
+o Fecha y número de personas   
+o Precio total calculado  
+o Información de contacto de la comunidad
+* El sistema muestra pantalla de éxito con:   
+o Mensaje de confirmación   
+o Número de reserva destacado   
+o Instrucción de revisar correo electrónicoExcepciones: 
+Ex01: Si la fecha seleccionada es anterior a hoy, mostrar error: "La fecha debe ser igual o posterior a hoy" y resaltar campo en rojo
+Ex02: Si faltan campos obligatorios al intentar confirmar, mostrar mensaje: "Por favor complete todos los campos obligatorios" y resaltar campos faltantes
+Ex03: Si el formato de correo es inválido, mostrar: "Ingrese un correo electrónico válido"
+Ex04: Si falla el envío de correo electrónico:   
+* Registrar la reserva de todas formas   
+* Mostrar advertencia: "Reserva registrada correctamente. No se pudo enviar el correo de confirmación. Número de reserva: [NÚMERO]. Por favor tome captura de pantalla"  
+* Registrar error en log del sistema
+Ex05: Si hay error al registrar en base de datos, mostrar: "Error al procesar la reserva. Intente nuevamente o contacte soporte"Postcondiciones: 
+* El turista recibe confirmación por correo electrónico
+* El turista tiene un número de reserva único para seguimiento
+* La reserva es visible en el panel administrativo para el administrador comunitario
+
+
+
+
+
+
+
+
+(UML- Expandido Nivel 2)
+Caso de Uso No.5: Gestionar Reserva
+Actor: TuristaRequisitos de Usabilidad: 
+* Panel debe ser simple y legible con tabla clara
+* Filtros deben ser fácilmente accesibles
+* Estados deben tener colores distintivos (ej: Pendiente=amarillo, Confirmada=verde, Cancelada=rojo, Completada=azul)
+* Cambio de estado debe requerir confirmación
+* Debe haber paginación si hay más de 20 reservasPrecondiciones:  
+* El administrador debe haber iniciado sesión con credenciales válidas
+* El administrador debe tener permisos de gestión de reservas
+* Debe existir al menos una reserva en el sistema
+Descripción:   
+* El administrador accede al panel de gestión de reservas desde el menú principal
+El sistema muestra tabla con todas las reservas, cada fila contiene:   
+o Número de reserva  
+o Fecha de la experiencia  
+o Nombre del turista  
+o Experiencia solicitada  
+o Número de personas   
+o Estado actual (Pendiente/Confirmada/Cancelada/Completada)   
+o Acciones disponibles
+* El administrador puede aplicar filtros:  
+o Por rango de fechas (desde - hasta)   
+o Por estado de reserva
+* El sistema actualiza la lista mostrando solo reservas que cumplen los criterios
+* El administrador selecciona una reserva específica haciendo clic en "Ver detalles" o "Cambiar estado"
+* El sistema muestra los detalles completos de la reserva
+* El administrador selecciona nuevo estado del menú desplegable:   
+o Pendiente a Confirmada   
+o Pendiente a Cancelada   
+o Confirmada a Completada   
+o Confirmada a Cancelada
+* El sistema solicita confirmación: "¿Está seguro de cambiar el estado a [NUEVO ESTADO]?"
+* El administrador confirma el cambio
+* El sistema actualiza el estado en base de datos
+* El sistema registra: fecha/hora del cambio, usuario que realizó el cambio, estado anterior y nuevo
+* El sistema muestra mensaje de éxito: "Estado actualizado correctamente"
+* La tabla se actualiza mostrando el nuevo estadoExcepciones: 
+Ex01: Si no hay reservas en el sistema, mostrar mensaje: "No hay reservas registradas aún"
+Ex02: Si no hay resultados con los filtros aplicados, mostrar: "No se encontraron reservas con estos criterios"
+Ex03: Si hay error al actualizar el estado: Mantener estado anterior   
+* Mostrar mensaje: "Error al actualizar estado. Intente nuevamente" 
+* Registrar error en log
+Ex04: Si el administrador cancela la confirmación de cambio de estado, cerrar diálogo y no realizar cambios
+Ex05: Si la sesión expiró, redirigir a login con mensaje: "Sesión expirada. Inicie sesión nuevamente"Postcondiciones: 
+ El estado de la reserva se actualiza correctamente en el sistema
+ Queda registro de auditoría del cambio (quién, cuándo, qué cambió)
+ La vista del panel refleja el estado actualizado
+ Las estadísticas del sistema se actualizan (si existen)
+
+(UML- Expandido Nivel 2)
+Caso de Uso No.6: Consultar ¿Cómo Llegar?
+Actor: TuristaRequisitos de Usabilidad: 
+ Información presentada en formato de pasos claros y numerados
+ Imágenes de referencia de alta calidad y relevantes
+ Uso de íconos para tipos de transporte
+ Información de costos destacada
+ Responsive para consulta desde móvil
+ Posibilidad de imprimir o descargar la informaciónPrecondiciones:
+ El turista debe tener acceso a la sección de Guía Práctica
+ Debe existir información de acceso cargada en el sistemaDescripción:   
+ El turista accede a la sección "Cómo Llegar" desde el menú principal o guía práctica
+ El sistema muestra la información organizada en dos tramos principales:
+ TRAMO 1: La Paz ? Sorata
+ El sistema presenta:   
+ Opciones de transporte disponibles (buses, minibuses, taxis compartidos)  
+ Ubicación de terminal o punto de partida en La Paz   
+ Horarios aproximados de salida  
+ Duración estimada del viaje  
+ Costo aproximado por persona   
+ Imágenes de referencia del terminal y tipo de transporte
+ TRAMO 2: Sorata ? Comunidades
+ El sistema muestra un selector o lista de comunidades disponibles
+ El turista selecciona una comunidad específica (o visualiza información general)
+ El sistema muestra para la comunidad seleccionada:   
+ Opciones de transporte local (vehículos, caminata)  
+ Punto de partida en Sorata   
+ Tiempo estimado de viaje  
+ Costo aproximado (si aplica)   
+ Dificultad de acceso (fácil/moderado/difícil)   
+ Imágenes de puntos de referencia clave  
+ Recomendaciones especiales (ej: mejor contratar guía local)
+ El turista puede cambiar de comunidad para ver diferentes opciones de acceso
+ El turista puede regresar a la vista general o navegar a otras seccionesExcepciones: 
+Ex01: Si no hay información de acceso para una comunidad específica, mostrar: "Información de acceso próximamente disponible. Contacte a la comunidad directamente"
+Ex02: Si faltan imágenes de referencia, mostrar placeholders con texto descriptivo
+Ex03: Si hay cambios estacionales en el acceso (ej: época de lluvias), mostrar alerta destacada con advertenciasPostcondiciones: 
+ El turista conoce cómo llegar desde La Paz hasta la comunidad específica de su interés
+ El turista tiene información de costos y tiempos estimados
+ El turista puede planificar su viaje con información visual de referencia
+
+
+(UML- Expandido Nivel 2)
+Caso de Uso No.7: Consultar Equipamiento Recomendado
+Actor: TuristaRequisitos de Usabilidad: 
+ Listas organizadas visualmente por categorías (Esencial, Recomendado, Opcional)
+ Uso de colores o iconos distintivos para cada categoría
+ Posibilidad de marcar items como "ya lo tengo" (checklist interactiva - opcional)
+ Formato imprimible
+ Responsive para consulta móvilPrecondiciones: 
+ El turista debe tener acceso a la sección de Guía Práctica
+ Debe existir información de equipamiento cargada para al menos un tipo de actividadDescripción:   
+ El turista accede a la sección "Equipamiento" o "Qué llevar" desde la guía práctica
+ El sistema muestra selector de tipo de actividad:  
+ Trekking/Caminatas  
+ Hospedaje Familiar  
+ Actividades Culturales 
+ Experiencia Completa (combinación)
+ El turista selecciona un tipo de actividad
+ El sistema muestra lista de equipamiento clasificada en tres categorías:
+ ESENCIAL (obligatorio/indispensable):   
+ Lista de items que el turista DEBE llevar   
+ Explicación breve de por qué es esencial   
+ Ejemplo: "Botiquín básico 
+ Esencial por distancia de centros médicos RECOMENDADO (conveniente):  
+ Lista de items que mejoran significativamente la experiencia   
+ Razón de la recomendación   
+ Ejemplo: "Cámara fotográfica 
+ Paisajes únicos dignos de capturar OPCIONAL (mejora experiencia):  
+ Lista de items que pueden ser útiles pero no son críticos   
+ Beneficio que aportan   
+ Ejemplo: "Binoculares 
+ Para observación de aves"
+ El turista puede cambiar de tipo de actividad para ver diferentes listas
+ El turista puede visualizar las tres categorías simultáneamenteExcepciones: 
+Ex01: Si no hay información de equipamiento para un tipo de actividad, mostrar: "Información en desarrollo. Por favor contacte a la comunidad para recomendaciones específicas"
+Ex02: Si hay consideraciones especiales de temporada (ej: época de lluvias requiere items adicionales), mostrar alerta destacadaPostcondiciones: 
+- El turista conoce qué debe llevar para su actividad específica- El turista puede priorizar su equipaje según la clasificación (Esencial > Recomendado > Opcional)- El turista está mejor preparado para su experiencia
+
+(UML- Expandido Nivel 2)
+Caso de Uso No.8: Consultar Información Climática
+Actor: TuristaRequisitos de Usabilidad: 
+ Información presentada con gráficos visuales simples (barras de temperatura, íconos de clima)
+ Uso de código de colores para temporadas (azul=fría, rojo=cálida, verde=ideal)
+ Destacar visualmente la "mejor época" para visitar
+ Responsive para consulta móvil- Información actualizada anualmentePrecondiciones:  
+ El turista debe tener acceso a la sección de Guía Práctica
+ Debe existir información climática registrada en el sistemaDescripción:   
+ El turista accede a la sección "Clima y Temporadas" desde la guía práctica
+ El sistema muestra información general organizada en secciones: CLIMA POR TEMPORADA:
+ El sistema presenta las dos temporadas principales:   
+ Temporada Seca (Mayo - Octubre):
+ Características climáticas     
+ Ventajas para el turismo     
+ Consideraciones especiales   Temporada de Lluvias (Noviembre - Abril):   
+ Características climáticas    
+ Ventajas/desventajas para el turismo     
+ Advertencias y precauciones MEJOR ÉPOCA PARA VISITAR:
+ El turista puede seleccionar tipo de experiencia (trekking, cultural, hospedaje)
+ El sistema muestra recomendación específica de mejor época para ese tipo de actividad
+ El sistema explica las razones (ej: "Trekking: mejor en temporada seca por senderos accesibles") TEMPERATURAS ESPERADAS:
+ El sistema muestra rangos de temperatura por temporada:   
+ Temperatura máxima promedio  
+ Temperatura mínima promedio   
+ Sensación térmica en altura   
+ Gráfico visual simple de barras o líneas RECOMENDACIONES DE VESTIMENTA:
+ El sistema presenta recomendaciones por temporada:  
+ Temporada Seca:     
+ Tipo de ropa recomendada (capas, protección solar)    
+ Accesorios necesarios (gorro, lentes de sol)   
+ Temporada de Lluvias:    
+ Tipo de ropa recomendada (impermeable, botas)    
+ Accesorios necesarios9. El turista puede comparar ambas temporadas visualmente
+ El turista puede regresar a otras secciones de la guía o continuar navegandoExcepciones: 
+Ex01: Si la información está desactualizada (más de 1 año), mostrar advertencia: "Información del año [AÑO]. Verifique condiciones actuales antes de viajar"
+Ex02: Si hay alertas climáticas especiales (fenómenos climáticos), mostrar banner destacado con la alerta
+Ex03: Si faltan datos de temperatura, mostrar solo información cualitativa disponiblePostcondiciones: 
+ El turista conoce las condiciones climáticas esperadas según temporada
+ El turista puede decidir la mejor época para su visita según sus preferencias y tipo de actividad
+ El turista sabe cómo preparar su vestimenta adecuadamente
+ El turista tiene expectativas realistas sobre el clima que enfrentará
+ El turista conoce qué debe llevar para su actividad específica
+ El turista puede priorizar su equipaje según la clasificación (Esencial > Recomendado > Opcional)
+ El turista está mejor preparado para su experiencia
+
+
+
+
+
+
+
+
+
+
