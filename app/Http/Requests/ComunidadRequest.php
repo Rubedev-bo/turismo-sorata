@@ -14,9 +14,12 @@ class ComunidadRequest extends FormRequest
 
     public function rules()
     {
+        // La imagen es obligatoria al crear (POST) pero opcional al actualizar (PUT/PATCH)
+        $imageRule = $this->isMethod('post') ? 'required|image|max:10240' : 'nullable|image|max:10240';
+
         return [
             'nombre' => 'required|string|max:100',
-            'imagen_representativa' => 'nullable|string',
+            'imagen_representativa' => $imageRule,
             'descripcion' => 'nullable|string',
             'contacto_email' => 'nullable|email|max:100',
             'contacto_telefono' => 'nullable|string|max:30',

@@ -1,0 +1,468 @@
+/* Sorata Pacha - visual theme (only CSS)
+   Colors and variables per spec
+*/
+:root{
+  --andino: #1E5F8C;
+  --yungas: #2D7A4F;
+  --nevado: #F8F9FA;
+  --terracota: #D4755B;
+  --amarillo: #F4A261;
+  --turquesa: #4ECDC4;
+  --atardecer: #E76F51;
+  --text-dark: #12313f;
+  --muted: #6b7a85;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Open Sans', Arial, sans-serif;
+  color:var(--text-dark);
+  background:var(--nevado);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* Navbar */
+.header{position:sticky;top:0;z-index:80}
+.header__nav{
+  display:flex;align-items:center;justify-content:center;
+  gap:18px;padding:18px 24px;background:transparent;transition:background 0.25s ease, backdrop-filter 0.25s ease, box-shadow 0.25s ease;
+}
+.header__nav.scrolled{background:rgba(255,255,255,0.95);box-shadow:0 4px 18px rgba(0,0,0,0.06);backdrop-filter:saturate(140%);}
+.nav__link{color:var(--andino);text-decoration:none;position:relative;padding:6px 4px;font-weight:600}
+.nav__link::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--turquesa);transition:width .28s cubic-bezier(.2,.9,.3,1)}
+.nav__link:hover::after{width:100%}
+
+/* Make logout form buttons look like the nav links */
+.nav__links form{display:inline}
+.nav__links .logout-button{
+  background:transparent;
+  border:0;
+  padding:6px 4px;
+  color:var(--andino);
+  font-weight:600;
+  font-family:inherit;
+  cursor:pointer;
+}
+.nav__links .logout-button::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--turquesa);transition:width .28s cubic-bezier(.2,.9,.3,1)}
+.nav__links .logout-button:hover::after{width:100%}
+
+/* Normalize link colors and prevent browser 'visited' purple */
+/* Default inline/paragraph links use text color; hover highlights use brand color */
+a, .container a{color:var(--text-dark)}
+a:visited, .container a:visited{color:var(--text-dark)}
+a:hover, .container a:hover, a:focus, .container a:focus{color:var(--andino)}
+
+/* Ensure nav links keep the brand color even after visit */
+.nav__link:visited, .nav__links .logout-button:visited{color:var(--andino)}
+
+/* Flash */
+.flash-success{background:var(--turquesa);color:var(--andino);padding:10px 16px;margin:12px;border-radius:8px;max-width:1100px;margin-left:auto;margin-right:auto}
+
+/* Main container */
+.container{max-width:1100px;margin:30px auto;padding:0 18px}
+
+/* Hero for homepage (applies when JS adds .sorata-hero to main) */
+/* Hero section (portada) - full screen image with gradient overlay */
+/* Hero styled with default background image (Sorata) and overlay gradient */
+/* Apply gradient only to the background image (gradient layered above image), so text/buttons are not tinted */
+main.sorata-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:0;background-position:center;background-size:cover;background-repeat:no-repeat;background-image:linear-gradient(135deg, rgba(30,95,140,0.45), rgba(45,122,79,0.35)), url('/css/fondo/imagen_fondo.jpeg')}
+/* remove pseudo overlay to avoid tinting content */
+main.sorata-hero::before{display:none}
+/* Allow hero content to be above overlay */
+main.sorata-hero .container{position:relative;z-index:2}
+main.sorata-hero .container{position:relative;z-index:2;text-align:left;color:#fff;padding:80px}
+main.sorata-hero h1{font-family:'Montserrat',sans-serif;font-size:48px;margin:0 0 12px;opacity:0;transform:translateY(8px);transition:all .8s ease}
+main.sorata-hero p.lead{font-size:20px;opacity:0;transform:translateY(8px);transition:all .9s ease}
+main.sorata-hero .hero-cta{margin-top:18px}
+
+/* Buttons (global styling) */
+button, .btn{cursor:pointer;border:0;border-radius:8px;padding:14px 32px;font-weight:600;transition:transform .18s ease, box-shadow .18s ease, background-color .3s ease}
+.btn-primary{background:var(--atardecer);color:#fff}
+.btn-primary:hover{background:var(--terracota);box-shadow:0 10px 25px rgba(0,0,0,0.18);transform:translateY(-3px)}
+.btn-secondary{background:var(--turquesa);color:var(--andino)}
+.btn-secondary:hover{background:#45B7AF}
+/* Outline button (hero secondary) */
+.btn-outline{background:transparent;color:#fff;border:2px solid #fff;padding:12px 30px;border-radius:8px;transition:all .3s ease}
+.btn-outline:hover{background:#fff;color:var(--andino);transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,255,255,0.3)}
+
+/* Grid layouts for comunidades/experiencias */
+.comunidades-grid,.experiencias-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:18px}
+.comunidad-card,.experiencia-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.08);transition:transform .4s cubic-bezier(0.4,0,0.2,1),box-shadow .4s}
+.comunidad-card:hover,.experiencia-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 12px 28px rgba(0,0,0,0.18)}
+.comunidad-card .card-content,.experiencia-card .card-content{padding:14px}
+.card-actions{margin-top:10px;display:flex;gap:10px;align-items:center}
+
+/* Image container and overlay */
+.image-container{position:relative;overflow:hidden;height:200px}
+.image-container img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.image-container .image-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(30,95,140,0.35), rgba(0,0,0,0.0));opacity:0;transition:opacity .4s}
+.comunidad-card:hover .image-container img,.experiencia-card:hover .image-container img{transform:scale(1.08);filter:brightness(0.9)}
+.comunidad-card:hover .image-container .image-overlay,.experiencia-card:hover .image-container .image-overlay{opacity:1}
+
+/* Hero specific: typewriter and button animations */
+.hero-section{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:60px 18px}
+.hero-section h1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:56px;color:#fff;margin:0 0 12px}
+.hero-section p.lead{color:#fff;font-size:20px;margin:0 0 18px}
+.hero-cta .btn{margin-right:12px}
+
+/* Typewriter effect (simple) */
+.typewriter{white-space:nowrap;overflow:hidden;border-right:2px solid rgba(255,255,255,0.8)}
+@keyframes typing { from { width:0 } to { width:100% } }
+@keyframes blink { 50% { border-color: transparent } }
+.typewriter.animate { animation: typing 1.6s steps(30,end), blink .7s step-end infinite }
+
+/* Ripple element in buttons */
+.ripple{position:absolute;border-radius:50%;transform:scale(0);opacity:0.8;background:rgba(255,255,255,0.4);pointer-events:none}
+
+/* Modal styles for comunidades/experiencias (mirrors sorata-modal but custom) */
+.modal-backdrop{position:fixed;inset:0;background:rgba(30,95,140,0.8);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;z-index:2000}
+.modal{background:#fff;border-radius:16px;padding:32px;max-width:700px;width:92%;box-shadow:0 30px 80px rgba(0,0,0,0.25);animation:modalSlideIn .4s ease-out}
+@keyframes modalSlideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Responsive adjustments for hero */
+@media (max-width:768px){
+  .hero-section h1{font-size:32px}
+  .hero-section p.lead{font-size:16px}
+}
+
+/* Ensure the content container that follows the hero is visually separated
+   and appears below the full-screen hero (prevents 'next-to' layout issues). */
+.hero-section + .container{margin-top:38vh;padding-top:18px}
+@media (max-width:1024px){
+  .hero-section + .container{margin-top:28vh}
+}
+@media (max-width:480px){
+  .hero-section + .container{margin-top:20vh}
+}
+
+/* Table -> Card layout override (no HTML change) */
+/* Make tables visually look like cards grid while preserving HTML */
+.container table{width:100%;border-collapse:collapse;background:transparent}
+.container table thead{display:none}
+.container table tbody{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.container table tbody tr{display:block;background:#fff;border-radius:14px;padding:18px;box-shadow:0 4px 6px rgba(0,0,0,0.06);transition:transform .28s ease,box-shadow .28s ease;overflow:hidden}
+.container table tbody tr:hover{transform:translateY(-6px);box-shadow:0 14px 35px rgba(0,0,0,0.12)}
+.container table tbody td{display:block}
+.container table tbody td a{font-family:'Montserrat',sans-serif;font-size:18px;color:var(--andino);text-decoration:none}
+
+/* Experiences list -> card grid */
+.container ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.container ul li{background:#fff;border-radius:14px;padding:18px;box-shadow:0 4px 6px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:8px}
+.container ul li a{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--andino);text-decoration:none}
+
+/* Card hover image/overlay - if images present inside card, these rules will apply */
+.card-img{display:block;width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:12px;transition:transform .35s ease}
+.card-content{transform:translateY(0);transition:transform .35s ease}
+.card:hover .card-img{transform:scale(1.06)}
+.card:hover .card-content{transform:translateY(-6px)}
+
+/* Comunidades: mejorar formato de imágenes y enlaces sin tocar HTML */
+/* Aplicar a imágenes dentro de contenedores para que luzcan como tarjetas */
+.container img{
+  display:block;
+  width:100% !important;
+  max-width:900px !important;
+  height:auto !important;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+  margin-bottom:16px;
+}
+
+/* Si la imagen está en un bloque pequeño (edit view), limitar tamaño sin romper layout */
+.container > div > img{max-width:720px !important}
+
+/* Estilizar links dentro de párrafos (ej. Reservar en esta comunidad) como CTAs */
+.container p a{display:inline-block;text-decoration:none;padding:10px 18px;border-radius:10px;background:var(--atardecer);color:#fff;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,0.12);transition:transform .18s ease,box-shadow .18s ease}
+.container p a:hover{background:var(--terracota);transform:translateY(-3px)}
+
+/* Estilizar enlaces en listas y tablas para que parezcan tarjetas/títulos elegantes */
+.container ul li a,.container table tbody td a{display:block;color:var(--andino);font-family:'Montserrat',sans-serif;font-size:18px;text-decoration:none}
+.container ul li a:hover,.container table tbody td a:hover{color:var(--yungas);text-decoration:underline}
+
+/* Si dentro de un listado hay una imagen seguido al link, reposicionar para que quede como mini-card */
+.container ul li img, .container table tbody tr img{width:100%;height:auto;border-radius:10px;object-fit:cover}
+
+/* Small helper: make sure admin forms/buttons inside .container keep visible contrast */
+.container form button, .container form input[type="submit"]{background:var(--andino);color:var(--nevado)}
+
+/* Modal */
+.sorata-modal-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.45);backdrop-filter:blur(8px);z-index:120}
+.sorata-modal{background:#fff;border-radius:12px;max-width:900px;width:95%;max-height:90vh;overflow:auto;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,0.25)}
+.sorata-modal .modal-close{position:absolute;right:18px;top:18px;background:transparent;border:0;font-size:22px;color:var(--andino);cursor:pointer}
+
+/* Animations: fade-in-up */
+.animate-on-scroll{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1)}
+.animate-on-scroll.in-view{opacity:1;transform:translateY(0)}
+
+/* Responsive adjustments */
+@media (max-width:1024px){
+  main.sorata-hero h1{font-size:40px}
+}
+@media (max-width:768px){
+  .container{padding:0 14px}
+  main.sorata-hero .container{padding:36px}
+  main.sorata-hero h1{font-size:28px}
+  .container ul{grid-template-columns:1fr}
+  .container table tbody{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  button,.btn{padding:10px 18px;border-radius:8px}
+  main.sorata-hero h1{font-size:22px}
+}
+
+/* Section backgrounds: alternate light and contrast backgrounds for visual separation
+  Uses top-level containers directly under main to avoid changing HTML. */
+main > .container:nth-of-type(odd){background:var(--nevado);padding:34px 18px}
+main > .container:nth-of-type(even){background:#E9ECEF;padding:34px 18px}
+
+/* Subtle Andes mountain texture applied as a pseudo-element so it doesn't affect content flow.
+  The SVG is intentionally low-contrast and uses currentColor with very low opacity. */
+main > .container::after{content:'';position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;opacity:0.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='200' viewBox='0 0 1200 200'><defs><linearGradient id='g' x1='0' x2='1'><stop stop-color='%231E5F8C' offset='0' stop-opacity='0.05'/><stop stop-color='%232D7A4F' offset='1' stop-opacity='0.05'/></linearGradient></defs><g fill='none' stroke='rgba(0,0,0,0.04)' stroke-width='1'><path d='M0 140 L80 100 L160 130 L240 90 L320 120 L400 80 L480 130 L560 70 L640 110 L720 60 L800 120 L880 80 L960 140 L1040 90 L1120 130 L1200 100' stroke='url(%23g)' /></g></svg>");background-repeat:repeat-x;background-position:top left;mix-blend-mode:multiply}
+
+/* Destaque: gradient vibrante and overlay for special sections (if a container gets marked) */
+.container.destaque{background-image:linear-gradient(120deg, #1E5F8C 0%, #2D7A4F 100%);color:#fff}
+.container.destaque::before{content:'';position:absolute;inset:0;background:rgba(30,95,140,0.85);mix-blend-mode:multiply;pointer-events:none}
+.container.destaque h1,.container.destaque p{color:#fff}
+
+/* Overlay on images for highlight effect when container has destaque - doesn't change HTML */
+.container.destaque img{filter:brightness(0.85)}
+
+/* Small utilities */
+.centered-form{max-width:600px;margin:40px auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,0.08)}
+.field{display:block;margin-bottom:14px}
+.field label{display:block;font-family:'Montserrat',sans-serif;margin-bottom:6px;font-weight:600}
+.field input,.field textarea{width:100%;padding:12px;border:1px solid #e6e9ec;border-radius:8px;transition:border-color .18s ease}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--andino);box-shadow:0 6px 18px rgba(30,95,140,0.06)}
+
+/* Footer */
+footer{background:var(--andino);color:var(--nevado);padding:24px 0 12px;margin-top:40px}
+footer a{color:var(--nevado)}
+
+/* Footer layout: multi-column section + bottom bar */
+.site-footer{max-width:1100px;margin:0 auto;padding:18px}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;padding:6px 18px;color:var(--nevado)}
+.footer-grid h4{color:var(--nevado);font-family:'Montserrat',sans-serif;margin:0 0 12px;font-size:15px;letter-spacing:0.06em}
+.footer-grid p{margin:0;color:rgba(248,249,250,0.95);line-height:1.5}
+.footer-grid ul{
+  /* Mostrar como lista normal: viñetas a la izquierda con espacio razonable */
+  list-style:disc; /* bullets */
+  padding-left:1.1rem; /* indent for bullets */
+  margin:0 0 6px 0;
+}
+.footer-grid li{margin-bottom:6px}
+.footer-grid a{
+  /* Enlaces como texto simple: sin padding, sin fondo, alineados con la viñeta */
+  color:rgba(248,249,250,0.95);
+  text-decoration:none;
+  padding:0 !important;
+  margin:0 !important;
+  display:inline !important;
+}
+.footer-grid a:hover{color:var(--turquesa);text-decoration:underline}
+
+/* .footer-bottom{max-width:1100px;margin:0 auto;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06)} */
+.footer-copy{color:rgba(248,249,250,0.8);font-size:14px}
+.footer-social a{color:rgba(248,249,250,0.95);margin-left:12px;text-decoration:none;font-weight:700}
+
+@media (max-width:992px){
+  .footer-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:12px;align-items:flex-start}
+}
+
+/* Reduce footer clutter on small screens: hide 'create' actions and social icons */
+@media (max-width:600px){
+  .footer-grid .footer-action{display:none}
+  .footer-social{display:none}
+  footer{padding:12px 0}
+  .footer-grid h4{font-size:14px}
+  .footer-copy{font-size:13px}
+}
+
+/* Footer-specific overrides: ensure footer links behave as list links (no button styles)
+   This only overrides the global action link rules for links inside the footer grid. */
+.footer-grid a,
+.footer-grid a[href*="/create"],
+.footer-grid a[href*="/edit"],
+.footer-grid a[href*="/desactivar"],
+.footer-grid a[href*="/delete"],
+.footer-grid a[href*="/destroy"]{
+  /* Plain list-style links: no button appearance */
+  display:inline;color:rgba(248,249,250,0.95);background:transparent;border:none;padding:0;margin:0;text-decoration:none;font-weight:400;box-shadow:none;border-radius:0;
+}
+.footer-grid ul{padding-left:0;margin-left:0}
+.footer-grid li{list-style:none;margin-bottom:8px}
+.footer-grid a:hover{color:var(--turquesa);text-decoration:underline}
+
+
+/* Small accessibility tweaks for focus */
+a:focus,button:focus,input:focus,textarea:focus{outline:3px solid rgba(78,205,196,0.18);outline-offset:2px}
+
+/* Remove default underlines globally but preserve hover accents where intended */
+a{text-decoration:none}
+
+/* Global select styling to match inputs */
+select, .container select, .sorata-form select{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #e6e9ec;
+  border-radius:8px;
+  background:#fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path fill="%232D7A4F" d="M0 0l5 6 5-6z"/></svg>') no-repeat calc(100% - 14px) center/10px 6px;
+  font-family:inherit;
+  font-size:15px;
+  box-shadow:none;
+  transition:border-color .18s ease, box-shadow .18s ease;
+}
+select:focus, .container select:focus, .sorata-form select:focus{outline:none;border-color:var(--andino);box-shadow:0 6px 18px rgba(30,95,140,0.06)}
+select option{padding:8px}
+
+/* Thumbnail behavior: in index grids show full image (contain) so users can see whole picture
+   but on the detail/show page the image remains cover and large. */
+.experiencias-grid .image-container{height:160px}
+.comunidades-grid .image-container{height:160px}
+.experiencias-grid .image-container img, .comunidades-grid .image-container img{
+  object-fit:contain !important;
+  object-position:center center;
+  background:#f5f7f9;
+  height:100%;
+}
+
+/* Ensure show/detail image keeps the original cover behavior and larger size */
+main .image-container{height:auto}
+main .image-container img{object-fit:cover}
+
+/* Modal images: center and contain so the whole image is visible inside modal windows */
+.sorata-modal .image-container{height:auto;max-height:380px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px}
+.sorata-modal .image-container img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;display:block}
+.sorata-modal .card-content{padding:8px 6px}
+
+/* Style action links (create/edit/desactivar) to match site design without changing HTML */
+/* Create actions: prominent pill (orange) */
+a[href*="/create"], a[href$="/create"]{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:8px;
+  background:var(--atardecer);
+  color:#fff;
+  font-weight:700;
+  box-shadow:0 8px 20px rgba(231,111,81,0.18);
+  transition:transform .18s ease, box-shadow .18s ease, background-color .18s;
+}
+a[href*="/create"]:hover{background:var(--terracota);transform:translateY(-2px)}
+
+/* Edit actions: subtle outline / secondary on white cards */
+.comunidad-card a[href*="/edit"], .experiencia-card a[href*="/edit"]{
+  display:inline-block;padding:6px 10px;border-radius:8px;background:transparent;color:var(--andino);border:1px solid rgba(30,95,140,0.12);font-weight:600;text-decoration:none
+}
+.comunidad-card a[href*="/edit"]:hover, .experiencia-card a[href*="/edit"]:hover{background:rgba(30,95,140,0.06)}
+
+/* Desactivar / borrar actions: warning outline */
+a[href*="/desactivar"], a[href*="/delete"], a[href*="/destroy"]{
+  display:inline-block;padding:6px 10px;border-radius:8px;background:transparent;color:rgba(255,255,255,0.95);border:1px solid rgba(255,255,255,0.12);font-weight:600;text-decoration:none;margin-left:6px
+}
+a[href*="/desactivar"]:hover, a[href*="/delete"]:hover, a[href*="/destroy"]:hover{background:rgba(255,255,255,0.06);color:#fff}
+
+/* If action links appear on light backgrounds (card area), use inverse styles */
+.container .comunidad-card a[href*="/desactivar"], .container .experiencia-card a[href*="/desactivar"]{
+  color:#E76F51;border:1px solid rgba(231,111,81,0.12);background:transparent
+}
+
+/* Small spacing for admin inline links */
+.card-actions a{padding:8px 12px}
+
+/* Strong footer override: ensure footer links are plain text (no button visuals).
+   Placed at end to override earlier action/link rules that may add padding/backgrounds. */
+.site-footer .footer-grid a,
+.site-footer .footer-grid a:link,
+.site-footer .footer-grid a:visited,
+.site-footer .footer-grid a:active{
+  display:inline !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  margin:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  color:rgba(248,249,250,0.95) !important;
+  text-decoration:none !important;
+  font-weight:400 !important;
+}
+.site-footer .footer-grid a:hover{
+  color:var(--turquesa) !important;
+  text-decoration:underline !important;
+  background:transparent !important;
+}
+
+/* Also ensure attribute-based action links inside footer (create/edit/desactivar/etc)
+   are not rendered as buttons. */
+.site-footer .footer-grid a[href*="/create"],
+.site-footer .footer-grid a[href*="/edit"],
+.site-footer .footer-grid a[href*="/desactivar"],
+.site-footer .footer-grid a[href*="/delete"],
+.site-footer .footer-grid a[href*="/destroy"]{
+  display:inline !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  font-weight:400 !important;
+}
+
+/* Footer lists: force transparent backgrounds and remove shadows on UL and LI */
+.site-footer .footer-grid ul,
+.site-footer .footer-grid li,
+.footer-grid ul,
+.footer-grid li{
+  background:transparent !important;
+  box-shadow:none !important;
+  -webkit-box-shadow:none !important;
+  -moz-box-shadow:none !important;
+}
+
+/* Responsive hamburger menu and mobile nav */
+.header__inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 18px}
+.nav__brand .nav__link{font-weight:800;font-family:'Montserrat',sans-serif;color:var(--andino);font-size:18px}
+.nav__links{display:flex;gap:14px;align-items:center}
+.hamburger{display:none;border:0;background:transparent;padding:8px;border-radius:8px;cursor:pointer}
+.hamburger .hamburger-line{display:block;width:22px;height:2px;background:var(--andino);margin:4px 0;transition:transform .28s ease,opacity .18s}
+.hamburger[aria-expanded="true"] .hamburger-line:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger[aria-expanded="true"] .hamburger-line:nth-child(2){opacity:0}
+.hamburger[aria-expanded="true"] .hamburger-line:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.mobile-nav-panel{position:fixed;right:0;top:0;height:100vh;width:300px;max-width:86vw;background:#fff;box-shadow:-20px 0 60px rgba(0,0,0,0.18);transform:translateX(110%);transition:transform .36s cubic-bezier(.2,.9,.3,1);z-index:1100;padding:28px;overflow:auto}
+.mobile-nav-panel.open{transform:translateX(0)}
+.mobile-nav-panel .nav__link{display:block;padding:12px 0;color:var(--text-dark);font-weight:700}
+.mobile-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.35);backdrop-filter:blur(6px);z-index:1005;opacity:0;pointer-events:none;transition:opacity .28s}
+.mobile-backdrop.open{opacity:1;pointer-events:auto}
+body.no-scroll{overflow:hidden}
+
+@media (max-width:900px){
+  .nav__links{display:none}
+  .hamburger{display:block}
+}
+
+/* Sorata form grid - 2 columns desktop, 1 column mobile */
+.sorata-form{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto;padding:0}
+.sorata-form .field{margin-bottom:12px}
+.sorata-form .form-row-full{grid-column:1 / -1}
+.sorata-form label{display:block;margin-bottom:6px;font-weight:700}
+.sorata-form label .required{color:#E76F51;margin-left:6px}
+.sorata-form select{appearance:none;background-image:linear-gradient(45deg,transparent 50%, rgba(0,0,0,0.25) 50%), linear-gradient(135deg, rgba(0,0,0,0.25) 50%, transparent 50%);background-position:calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);background-size:6px 6px,6px 6px;padding-right:36px}
+.sorata-form textarea{min-height:140px;resize:vertical}
+.sorata-form .actions{grid-column:1 / -1;display:flex;justify-content:flex-end;gap:12px}
+
+@media (max-width:768px){
+  .sorata-form{grid-template-columns:1fr;padding:0 8px}
+  .mobile-nav-panel{width:280px}
+}

@@ -31,4 +31,10 @@ class Experiencia extends Model
     {
         return $this->hasMany(Reserva::class, 'experiencia_id');
     }
+
+    // Usar la clave primaria personalizada para el route model binding
+    public function getRouteKeyName()
+    {
+        return 'experiencia_id';
+    }
 }

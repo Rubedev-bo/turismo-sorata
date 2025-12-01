@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('comunidades.update', $comunidad->comunidad_id) }}" method="POST">
+    <form action="{{ route('comunidades.update', $comunidad) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div>
@@ -34,6 +34,13 @@
                 <option value="activa" {{ $comunidad->estado == 'activa' ? 'selected' : '' }}>Activa</option>
                 <option value="inactiva" {{ $comunidad->estado == 'inactiva' ? 'selected' : '' }}>Inactiva</option>
             </select>
+        </div>
+        <div>
+            <label>Imagen representativa</label>
+            @if($comunidad->imagen_representativa)
+                <div><img src="{{ $comunidad->imagen_representativa }}" alt="Imagen" style="max-width:200px;max-height:120px;"></div>
+            @endif
+            <input type="file" name="imagen_representativa" accept="image/*">
         </div>
         <button type="submit">Actualizar</button>
     </form>

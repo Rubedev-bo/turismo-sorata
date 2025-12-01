@@ -36,4 +36,10 @@ class Comunidad extends Model
     {
         return $this->hasMany(Administrador::class, 'comunidad_id');
     }
+
+    // Usar la clave primaria personalizada para el route model binding
+    public function getRouteKeyName()
+    {
+        return 'comunidad_id';
+    }
 }

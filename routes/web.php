@@ -2,17 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TourController;
-use App\Http\Controllers\ContactController;
+
 use App\Models\Comunidad;
 use App\Models\Experiencia;
 use App\Models\Reserva;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/tours', [TourController::class, 'index'])->name('tours');
-Route::get('/contacto', [ContactController::class, 'index'])->name('contact');
-Route::post('/contacto', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/', function () {
+    $reservas = Reserva::orderBy('created_at','desc')->take(6)->get();
+    return view('inicio', compact('reservas'));
+});
 
 // Ruta de inicio para turistas (sin login)
 Route::get('/inicio', function(){ return view('inicio'); })->name('inicio');
@@ -33,7 +31,7 @@ Route::prefix('admin')->middleware(\App\Http\Middleware\CheckAdminAuth::class)->
 });
 
 // Rutas para CRUD y acciones especificas
-Route::resource('comunidades', \App\Http\Controllers\ComunidadController::class)->names('comunidades');
+Route::resource('comunidades', \App\Http\Controllers\ComunidadController::class)->names('comunidades')->parameters(['comunidades' => 'comunidad']);
 Route::get('comunidades/{comunidad}/desactivar', [\App\Http\Controllers\ComunidadController::class, 'desactivar'])->name('comunidades.desactivar');
 
 Route::resource('experiencias', \App\Http\Controllers\ExperienciaController::class)->names('experiencias');

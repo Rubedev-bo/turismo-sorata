@@ -19,8 +19,6 @@ class Reserva extends Model
         'nombre_completo',
         'email',
         'telefono',
-        'tipo_habitacion',
-        'servicios',
         'estado',
         'precio_total',
         'confirmacion_automatica',

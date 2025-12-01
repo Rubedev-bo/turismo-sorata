@@ -22,10 +22,6 @@ class ReservaRequest extends FormRequest
             'nombre_completo' => 'required|string|max:200',
             'email' => 'required|email|max:200',
             'telefono' => 'required|string|max:50',
-            'tipo_habitacion' => 'nullable|in:Simple,Doble,Triple',
-            'servicios' => 'nullable|array',
-            'servicios.*' => 'string|max:100',
-            'terminos' => 'accepted',
         ];
     }
 }

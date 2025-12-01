@@ -28,9 +28,22 @@ class ReservaController extends Controller
             }
         }
 
-        // Normalizar servicios a JSON si viene array
-        if (!empty($data['servicios']) && is_array($data['servicios'])) {
-            $data['servicios'] = json_encode($data['servicios']);
+        // Calcular precio_total: (ninos + adultos) * precio de la experiencia
+        $numeroAdultos = isset($data['numero_adultos']) ? (int) $data['numero_adultos'] : 0;
+        $numeroNinos = isset($data['numero_ninos']) ? (int) $data['numero_ninos'] : 0;
+        $cantidadPersonas = $numeroAdultos + $numeroNinos;
+
+        if (!empty($data['experiencia_id'])) {
+            $experiencia = Experiencia::find($data['experiencia_id']);
+            if ($experiencia) {
+                $precioUnitario = is_null($experiencia->precio_bs) ? 0 : (float) $experiencia->precio_bs;
+                $data['precio_total'] = $cantidadPersonas * $precioUnitario;
+            } else {
+                $data['precio_total'] = 0;
+            }
+        } else {
+            // Si no hay experiencia vinculada, dejar en 0
+            $data['precio_total'] = 0;
         }
 
         $reserva = Reserva::create($data);
